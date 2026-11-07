@@ -1,0 +1,109 @@
+@import "@fontsource/outfit/latin-400.css";
+@import "@fontsource/outfit/latin-500.css";
+@import "@fontsource/outfit/latin-600.css";
+@import "@fontsource/fraunces/latin-500.css";
+@import "@fontsource/fraunces/latin-600.css";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --color-bg: #f3efe6;
+  --color-surface: #faf7f1;
+  --color-ink: #1a1714;
+  --color-muted: #6f675e;
+  --color-line: #e2d9cc;
+  --color-brass: #9a6232;
+  --color-brass-ink: #fff8f1;
+  --color-good: #1f6a45;
+  --color-bad: #9c3b2e;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+  body {
+    min-height: 100%;
+  }
+  a,
+  button,
+  [role="button"] {
+    caret-color: transparent;
+  }
+  a,
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  header a,
+  footer a,
+  nav a,
+  button,
+  [role="button"] {
+    user-select: none;
+  }
+  ::selection {
+    background: #ead7c4;
+    color: var(--color-ink);
+  }
+  input[type="range"] {
+    accent-color: var(--color-brass);
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@page {
+  margin: 14mm;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+  }
+  .print-sheet {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+}
+
+.print-sheet {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+
+.menu-panel {
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--color-ink) 8%, transparent);
+}
+
+.print-sheet[data-watermark="1"]::after {
+  content: "VISTA PREVIA";
+  position: absolute;
+  inset: 30% 0 auto;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--color-brass) 55%, transparent);
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
